@@ -7,8 +7,3 @@
 int getOne(){
     return 1;
 }
-
-int main(){
-    printf("Hello World");
-    return 0;
-}
