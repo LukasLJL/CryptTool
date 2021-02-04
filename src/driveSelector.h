@@ -1,2 +1,4 @@
 char *getMasterKeyPath();
-void listAllDrives();
+int getNumberOfDrives();
+void getAllDrives(char *);
+void getOSTyp();
