@@ -1,1 +1,2 @@
 char *getMasterKeyPath();
+void listAllDrives();

@@ -1,1 +1,1 @@
-add_executable(main main.c driveSelector.h)
+add_executable(main main.c driveSelector.h driveSelector.c)
