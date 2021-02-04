@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <string.h>
+#include "driveSelector.h"
 
 #ifdef __linux
 char *osTyp = "Linux";
+char *pathToKey = "/CryptTool/MAGIC.KEY";
 #elif _WIN64
 char *osTyp = "Windows";
+char *pathToKey = ":/CryptTool/MAGIC.KEY";
 #else
 char *osTyp = "Unkown";
 #endif
 
-char *getOSTyp();
 
-
-void getAllDrives(char *drives) {
+void getAllDrives(char drives[][20]) {
     FILE *fp;
     char cmd_results[100];
     int driveCounter = 0;
@@ -22,7 +23,7 @@ void getAllDrives(char *drives) {
         //Loop through output of command to list all drives
         while (fgets(cmd_results, sizeof(cmd_results), fp) != NULL) {
             if (strcmp(cmd_results, "Name") != 1) {
-                drives[driveCounter] = cmd_results[0];
+                drives[driveCounter][0] = cmd_results[0];
                 driveCounter++;
             }
         }
@@ -31,13 +32,19 @@ void getAllDrives(char *drives) {
         fp = popen("ls /mnt", "r");
         //Loop through output of command to list all drives
         while (fgets(cmd_results, sizeof(cmd_results), fp) != NULL) {
-            drives[driveCounter] = cmd_results[0];
+            int i = 0;
+            //Clear the current String
+            memset(drives[driveCounter], 0, sizeof(drives[driveCounter]));
+            while (cmd_results[i] != '\n') {
+                drives[driveCounter][i] = cmd_results[i];
+                i++;
+            }
             driveCounter++;
         }
     }
 }
 
-//Does the same thing as getAllDrives, but it just counts the amount of drives to create an array with the correct size
+//Code executes the same commands on the os, but is just counting the drives now
 int getNumberOfDrives() {
     FILE *fp;
     int driveCounter = 0;
@@ -49,6 +56,7 @@ int getNumberOfDrives() {
                 driveCounter++;
             }
         }
+        driveCounter--;
     } else if (getOSTyp() == "Linux") {
         fp = popen("ls /mnt", "r");
         while (fgets(cmd_results, sizeof(cmd_results), fp) != NULL) {
@@ -58,8 +66,19 @@ int getNumberOfDrives() {
     return driveCounter;
 }
 
-char *getMasterKeyPath() {
 
+void getMasterKeyPath_StringDriveLetter(char *driveLetter, char *pathToMasterKey) {
+    //Clearing PathTo..
+    memset(pathToMasterKey, 0, sizeof(pathToMasterKey));
+    strcat(pathToMasterKey, driveLetter);
+    strcat(pathToMasterKey, pathToKey);
+}
+
+void getMasterKeyPath_CharDriveLetter(char driveLetter, char *pathToMasterKey) {
+    //Clearing PathTo..
+    memset(pathToMasterKey, 0, sizeof(pathToMasterKey));
+    strncat(pathToMasterKey, &driveLetter, 1);
+    strcat(pathToMasterKey, pathToKey);
 }
 
 char *getOSTyp() {
