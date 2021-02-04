@@ -1,1 +1,1 @@
-add_executable(cryptlib-components cryptlib-components-test.c ../munit/munit.h)
+add_executable(cryptlib-components cryptlib-components-test.c ../cryptlib/cryptlib.c ../munit/munit.h)
