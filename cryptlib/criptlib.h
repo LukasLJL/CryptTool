@@ -5,6 +5,7 @@
 #ifndef CRYPT_TOOL_CRIPTLIB_H
 #define CRYPT_TOOL_CRIPTLIB_H
 
-int getOne();
+int *getSetForOffsetFromKey(int);
+int hashKey();
 
 #endif //CRYPT_TOOL_CRIPTLIB_H
