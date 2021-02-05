@@ -23,6 +23,7 @@ void getAllDrives(char drives[][20]) {
         //Loop through output of command to list all drives
         while (fgets(cmd_results, sizeof(cmd_results), fp) != NULL) {
             if (strcmp(cmd_results, "Name") != 1) {
+                memset(drives[driveCounter], 0, sizeof(drives[driveCounter]));
                 drives[driveCounter][0] = cmd_results[0];
                 driveCounter++;
             }
