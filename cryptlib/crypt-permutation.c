@@ -38,7 +38,7 @@ int* getOffsetMap(const char *key){
 
     int *offset = getUnitOfOffset(key);
     for (int rowIndex = 0; rowIndex < OFFSET_ARRAY_LEN; rowIndex++){
-        // performOffsetRow(map + rowIndex * OFFSET_ARRAY_LEN, rowIndex, OFFSET_ARRAY_LEN);
+         performOffsetRow(map + rowIndex * OFFSET_ARRAY_LEN, rowIndex, OFFSET_ARRAY_LEN);
     }
 
     // TODO: Implement columns
