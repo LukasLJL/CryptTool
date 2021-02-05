@@ -5,8 +5,9 @@
 #ifndef CRYPT_TOOL_CRIPT_PERMUTATION_H
 #define CRYPT_TOOL_CRIPT_PERMUTATION_H
 
-int *getSetForOffsetFromKey(const char *);
+int *getUnitOfOffset(const char *);
 int hashKey(const char *);
 int* getOffsetMap(const char *);
+void performOffsetRow(int *, int, int);
 
 #endif //CRYPT_TOOL_CRIPT_PERMUTATION_H

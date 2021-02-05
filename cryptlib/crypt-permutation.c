@@ -36,12 +36,31 @@ int* getOffsetMap(const char *key){
         *(map + defaultIndex) = defaultIndex;
     }
 
-    int *offset = getSetForOffsetFromKey(key);
+    int *offset = getUnitOfOffset(key);
+    for (int rowIndex = 0; rowIndex < OFFSET_ARRAY_LEN; rowIndex++){
+        // performOffsetRow(map + rowIndex * OFFSET_ARRAY_LEN, rowIndex, OFFSET_ARRAY_LEN);
+    }
+
+    // TODO: Implement columns
 
     return map;
 }
 
-int *getSetForOffsetFromKey(const char* key) {
+void performOffsetRow(int *rowPtr, int permutationLen, int arrayLen){
+    // create copy of row
+    int rowCopy[arrayLen];
+    for (int rowIndex = 0; rowIndex < arrayLen; rowIndex++){
+        rowCopy[rowIndex] = rowPtr[rowIndex];
+    }
+
+    // translate permutation
+    for (int rowIndex = 0; rowIndex < arrayLen; rowIndex++){
+        int newIndex = (rowIndex + permutationLen) % arrayLen;
+        rowPtr[newIndex] = rowCopy[rowIndex];
+    }
+}
+
+int *getUnitOfOffset(const char* key) {
     int keyHash = hashKey(key);
 
     // initialize new array in heap
