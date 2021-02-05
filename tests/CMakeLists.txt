@@ -1,2 +1,2 @@
-add_executable(cryptlib-components cryptlib-components-test.c ../cryptlib/cryptlib.c ../munit/munit.c)
+add_executable(cryptlib-components cryptlib-components-test.c ../cryptlib/crypt-permutation.c ../cryptlib/cryptlib-io.c ../munit/munit.c)
 add_executable(driveSelectorTest driveSelectorTests.c ../src/driveSelector.h ../src/driveSelector.c)
