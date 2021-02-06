@@ -29,7 +29,6 @@ MunitResult canHashKey(const MunitParameter *params, void *user_data) {
     munit_assert_int(100000000, >, hashKey(key));
     return MUNIT_OK;
 }
-
 MunitResult canGenerateOffsetMap(const MunitParameter *params, void *user_data) {
     // generate random string key
     char key[20];
@@ -54,7 +53,6 @@ void resetArray(int currentArray[], const int defaultArray[], int len){
 }
 
 MunitResult canPermuteRow(const MunitParameter *params, void *user_data) {
-    // generate random string key
     int testRow[] = {0, 1, 2, 3};
     int defaultRow[] = {0, 1, 2, 3};
 
@@ -63,21 +61,57 @@ MunitResult canPermuteRow(const MunitParameter *params, void *user_data) {
     int expectedAfterShiftTwo[] = {2, 3, 0, 1};
     int expectedAfterShiftThree[] = {1, 2, 3, 0};
 
-    performOffsetRow(testRow, 0, 4);
+    performOffsetRow(testRow, 0);
     munit_assert_memory_equal(sizeof defaultRow, testRow, expectedAfterShiftZero);
     resetArray(testRow, defaultRow, 4);
 
-    performOffsetRow(testRow, 1, 4);
+    performOffsetRow(testRow, 1);
     munit_assert_memory_equal(sizeof defaultRow, testRow, expectedAfterShiftOne);
     resetArray(testRow, defaultRow, 4);
 
-    performOffsetRow(testRow, 2, 4);
+    performOffsetRow(testRow, 2);
     munit_assert_memory_equal(sizeof defaultRow, testRow, expectedAfterShiftTwo);
     resetArray(testRow, defaultRow, 4);
 
-    performOffsetRow(testRow, 3, 4);
+    performOffsetRow(testRow, 3);
     munit_assert_memory_equal(sizeof defaultRow, testRow, expectedAfterShiftThree);
     resetArray(testRow, defaultRow, 4);
+
+    return MUNIT_OK;
+}
+MunitResult canPermuteColumn(const MunitParameter *params, void *user_data) {
+    // the 9s are intended to represent unchanged values
+
+    int testColumn[] =              {0, 9, 9, 9, 1, 9, 9, 9, 2, 9, 9, 9, 3, 9, 9, 9};
+    int testColTwo[] =              {9, 0, 9, 9, 9, 1, 9, 9, 9, 2, 9, 9, 9, 3, 9, 9};
+    int defaultColumn[] =           {0, 9, 9, 9, 1, 9, 9, 9, 2, 9, 9, 9, 3, 9, 9, 9};
+    int defaultColTwo[] =           {9, 0, 9, 9, 9, 1, 9, 9, 9, 2, 9, 9, 9, 3, 9, 9};
+
+    int expectedAfterShiftZero[] =  {0, 9, 9, 9, 1, 9, 9, 9, 2, 9, 9, 9, 3, 9, 9, 9};
+    int expectedAfterShiftOne[] =   {3, 9, 9, 9, 0, 9, 9, 9, 1, 9, 9, 9, 2, 9, 9, 9};
+    int expectedAfterShiftTwo[] =   {2, 9, 9, 9, 3, 9, 9, 9, 0, 9, 9, 9, 1, 9, 9, 9};
+    int expectedAfterShiftThree[] = {1, 9, 9, 9, 2, 9, 9, 9, 3, 9, 9, 9, 0, 9, 9, 9};
+    int expectedAfterColTwo[] =     {9, 1, 9, 9, 9, 2, 9, 9, 9, 3, 9, 9, 9, 0, 9, 9};
+
+    performOffsetColumn(testColumn, 0, 0);
+    munit_assert_memory_equal(sizeof defaultColumn, testColumn, expectedAfterShiftZero);
+    resetArray(testColumn, defaultColumn, 16);
+
+    performOffsetColumn(testColumn, 1, 0);
+    munit_assert_memory_equal(sizeof defaultColumn, testColumn, expectedAfterShiftOne);
+    resetArray(testColumn, defaultColumn, 16);
+
+    performOffsetColumn(testColumn, 2, 0);
+    munit_assert_memory_equal(sizeof defaultColumn, testColumn, expectedAfterShiftTwo);
+    resetArray(testColumn, defaultColumn, 16);
+
+    performOffsetColumn(testColumn, 3, 0);
+    munit_assert_memory_equal(sizeof defaultColumn, testColumn, expectedAfterShiftThree);
+    resetArray(testColumn, defaultColumn, 16);
+
+    performOffsetColumn(testColTwo, 3, 1);
+    munit_assert_memory_equal(sizeof defaultColTwo, testColTwo, expectedAfterColTwo);
+    resetArray(testColTwo, defaultColTwo, 16);
 
     return MUNIT_OK;
 }
@@ -108,8 +142,16 @@ MunitTest tests[] = {
                 NULL
         },
         {
-                "/can_gen_offset_map",
+                "/can_permute_row",
                 canPermuteRow,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_permute_column",
+                canPermuteColumn,
                 NULL,
                 NULL,
                 MUNIT_TEST_OPTION_NONE,

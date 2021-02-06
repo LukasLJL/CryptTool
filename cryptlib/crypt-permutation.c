@@ -25,42 +25,55 @@ int hashKey(const char *keySting) {
     return abs((keyAsInt) ^ (keyAsInt * HASH_SEED) % MAX_HASH_SIZE);
 }
 
-int* getOffsetMap(const char *key){
+int *getOffsetMap(const char *key) {
     int *map = malloc(sizeof(int) * OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN);
 
     // catch error if memoryAllocationFailed
     catchMemoryAllocationFailure(map);
 
     // default initialize array
-    for (int defaultIndex = 0; defaultIndex < OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN; defaultIndex++){
+    for (int defaultIndex = 0; defaultIndex < OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN; defaultIndex++) {
         *(map + defaultIndex) = defaultIndex;
     }
 
     int *offset = getUnitOfOffset(key);
-    for (int rowIndex = 0; rowIndex < OFFSET_ARRAY_LEN; rowIndex++){
-         performOffsetRow(map + rowIndex * OFFSET_ARRAY_LEN, rowIndex, OFFSET_ARRAY_LEN);
+    for (int rowIndex = 0; rowIndex < OFFSET_ARRAY_LEN; rowIndex++) {
+        performOffsetRow(map + rowIndex * OFFSET_ARRAY_LEN, offset[rowIndex]);
+        performOffsetColumn(map, offset[rowIndex], rowIndex);
     }
-
-    // TODO: Implement columns
 
     return map;
 }
 
-void performOffsetRow(int *rowPtr, int permutationLen, int arrayLen){
+void performOffsetColumn(int *matrixPtr, int permutationLen, int colPos) {
+    // create copy of column
+    int colCopy[OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN];
+    for (int index = 0; index < OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN; index++) {
+        colCopy[index] = matrixPtr[index];
+    }
+
+    // translate permutation
+    for (int colIndex = 0; colIndex < OFFSET_ARRAY_LEN; colIndex++) {
+        int newIndex = ((colIndex + permutationLen) % OFFSET_ARRAY_LEN) * OFFSET_ARRAY_LEN + colPos;
+        matrixPtr[newIndex] = colCopy[colIndex * OFFSET_ARRAY_LEN + colPos];
+    }
+}
+
+void performOffsetRow(int *rowPtr, int permutationLen) {
     // create copy of row
-    int rowCopy[arrayLen];
-    for (int rowIndex = 0; rowIndex < arrayLen; rowIndex++){
+    int rowCopy[OFFSET_ARRAY_LEN];
+    for (int rowIndex = 0; rowIndex < OFFSET_ARRAY_LEN; rowIndex++) {
         rowCopy[rowIndex] = rowPtr[rowIndex];
     }
 
     // translate permutation
-    for (int rowIndex = 0; rowIndex < arrayLen; rowIndex++){
-        int newIndex = (rowIndex + permutationLen) % arrayLen;
+    for (int rowIndex = 0; rowIndex < OFFSET_ARRAY_LEN; rowIndex++) {
+        int newIndex = (rowIndex + permutationLen) % OFFSET_ARRAY_LEN;
         rowPtr[newIndex] = rowCopy[rowIndex];
     }
 }
 
-int *getUnitOfOffset(const char* key) {
+int *getUnitOfOffset(const char *key) {
     int keyHash = hashKey(key);
 
     // initialize new array in heap
@@ -68,7 +81,7 @@ int *getUnitOfOffset(const char* key) {
     catchMemoryAllocationFailure(offsetArray);
 
     // set values for array between 0 and 3
-    for (int offsetIndex = 0; offsetIndex < OFFSET_ARRAY_LEN; offsetIndex++){
+    for (int offsetIndex = 0; offsetIndex < OFFSET_ARRAY_LEN; offsetIndex++) {
         offsetArray[offsetIndex] = abs((keyHash * (offsetIndex + OFFSET_SEED)) % 4);
     }
 

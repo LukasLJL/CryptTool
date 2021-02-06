@@ -8,6 +8,7 @@
 int *getUnitOfOffset(const char *);
 int hashKey(const char *);
 int* getOffsetMap(const char *);
-void performOffsetRow(int *, int, int);
+void performOffsetRow(int *, int);
+void performOffsetColumn(int*, int, int);
 
 #endif //CRYPT_TOOL_CRIPT_PERMUTATION_H
