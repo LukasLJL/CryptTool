@@ -80,9 +80,9 @@ int *getUnitOfOffset(const char *key) {
     int *offsetArray = malloc(OFFSET_ARRAY_LEN * sizeof(int));
     catchMemoryAllocationFailure(offsetArray);
 
-    // set values for array between 0 and 3
+    // set values for array between 0 and OFFSET_ARRAY_LEN
     for (int offsetIndex = 0; offsetIndex < OFFSET_ARRAY_LEN; offsetIndex++) {
-        offsetArray[offsetIndex] = abs((keyHash * (offsetIndex + OFFSET_SEED)) % 4);
+        offsetArray[offsetIndex] = abs((keyHash * (offsetIndex + OFFSET_SEED)) % OFFSET_ARRAY_LEN);
     }
 
     return offsetArray;
