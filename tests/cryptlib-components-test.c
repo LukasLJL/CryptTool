@@ -124,6 +124,17 @@ MunitResult canPermute(const MunitParameter *params, void *user_data) {
 
     return MUNIT_OK;
 }
+MunitResult canUnpermute(const MunitParameter *params, void *user_data) {
+    int offsetMap[] = {15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+
+    char testArray[] =          {'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'A', 'B'};
+    char expectedArray[] =      {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'};
+
+    void* unpermutedArray = unpermuteFromMap(testArray, offsetMap, sizeof testArray);
+    munit_assert_memory_equal(sizeof testArray, unpermutedArray, expectedArray);
+
+    return MUNIT_OK;
+}
 MunitResult canCreateCopy(const MunitParameter *params, void *user_data) {
     char testArray[] =    {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
     char expectedArray[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 0, 0, 0, 0, 0, 0, 0};
@@ -186,6 +197,14 @@ MunitTest tests[] = {
         {
                 "/can_permute",
                 canPermute,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_unpermute",
+                canUnpermute,
                 NULL,
                 NULL,
                 MUNIT_TEST_OPTION_NONE,

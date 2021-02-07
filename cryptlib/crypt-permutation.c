@@ -15,6 +15,9 @@
 void *permute(void *ptrData, char *key, size_t len){
     return permuteFromMap(ptrData, getOffsetMap(key), len);
 }
+void *unpermute(void *ptrData, char *key, size_t len){
+    return unpermuteFromMap(ptrData, getOffsetMap(key), len);
+}
 
 void *permuteFromMap(void *ptrData, const int *offSetMap, size_t len){
     char *permutedArray = createCopy(ptrData, len);
@@ -25,6 +28,16 @@ void *permuteFromMap(void *ptrData, const int *offSetMap, size_t len){
     }
 
     return permutedArray;
+}
+void *unpermuteFromMap(void *ptrData, const int *offSetMap, size_t len){
+    char const *permutedArray = createCopy(ptrData, len);
+    char *unpermutedArray = createCopy(ptrData, len);
+
+    for (int index = 0; index < OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN; index++){
+        *(unpermutedArray + index) = *(permutedArray + offSetMap[index] - 1);
+    }
+
+    return unpermutedArray;
 }
 
 void* createCopy(void *ptrData, size_t len){
