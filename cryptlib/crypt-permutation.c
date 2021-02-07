@@ -12,6 +12,38 @@
 #define OFFSET_ARRAY_LEN 4
 #define OFFSET_SEED 720
 
+void *permute(void *ptrData, char *key, size_t len){
+    return permuteFromMap(ptrData, getOffsetMap(key), len);
+}
+
+void *permuteFromMap(void *ptrData, const int *offSetMap, size_t len){
+    char *permutedArray = createCopy(ptrData, len);
+    char const *safeUnpermutedArray = createCopy(ptrData, len);
+
+    for (int index = 0; index < OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN; index++){
+        *(permutedArray + offSetMap[index] - 1) = *(safeUnpermutedArray + index);
+    }
+
+    return permutedArray;
+}
+
+void* createCopy(void *ptrData, size_t len){
+    int differenceToBlock = OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN - (int) len % (OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN);
+
+    // copy existing data
+    void *copy = malloc(len + differenceToBlock);
+    for (int index = 0; index < len; index++){
+        *(((char *)copy) + index) = *(((char *)ptrData) + index);
+    }
+
+    // initialize remaining data to 0
+    for (int index = 0; index < differenceToBlock; index++){
+        *(((char *)copy) + index + (int) len) = 0;
+    }
+
+    return copy;
+}
+
 int hashKey(const char *keySting) {
     // convert keyAsInt from String to int
     int keyAsInt = 0;

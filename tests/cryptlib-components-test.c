@@ -6,6 +6,11 @@
 #include "../munit/munit.h"
 #include "../cryptlib/cript-permutation.h"
 
+void resetArray(int currentArray[], const int defaultArray[], int len){
+    for (int index = 0; index < len; index++){
+        currentArray[index] = defaultArray[index];
+    }
+}
 void genKey(char * string){
     sprintf(string, "%d", munit_rand_int_range(0, INT16_MAX));
 }
@@ -45,13 +50,6 @@ MunitResult canGenerateOffsetMap(const MunitParameter *params, void *user_data) 
     munit_assert_int(120, ==, checksum);
     return MUNIT_OK;
 }
-
-void resetArray(int currentArray[], const int defaultArray[], int len){
-    for (int index = 0; index < len; index++){
-        currentArray[index] = defaultArray[index];
-    }
-}
-
 MunitResult canPermuteRow(const MunitParameter *params, void *user_data) {
     int testRow[] = {0, 1, 2, 3};
     int defaultRow[] = {0, 1, 2, 3};
@@ -115,6 +113,26 @@ MunitResult canPermuteColumn(const MunitParameter *params, void *user_data) {
 
     return MUNIT_OK;
 }
+MunitResult canPermute(const MunitParameter *params, void *user_data) {
+    int offsetMap[] = {15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+
+    char testArray[] =      {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'};
+    char expectedArray[] =   {'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'A', 'B'};
+
+    void* permutedArray = permuteFromMap(testArray, offsetMap, sizeof testArray);
+    munit_assert_memory_equal(sizeof testArray, permutedArray, expectedArray);
+
+    return MUNIT_OK;
+}
+MunitResult canCreateCopy(const MunitParameter *params, void *user_data) {
+    char testArray[] =    {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
+    char expectedArray[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 0, 0, 0, 0, 0, 0, 0};
+
+    void *newArray = createCopy(testArray, sizeof testArray);
+    munit_assert_memory_equal(sizeof expectedArray, newArray, expectedArray);
+
+    return MUNIT_OK;
+}
 
 MunitTest tests[] = {
         {
@@ -152,6 +170,22 @@ MunitTest tests[] = {
         {
                 "/can_permute_column",
                 canPermuteColumn,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_create_copy",
+                canCreateCopy,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_permute",
+                canPermute,
                 NULL,
                 NULL,
                 MUNIT_TEST_OPTION_NONE,
