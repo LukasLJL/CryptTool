@@ -38,7 +38,6 @@ void encrypt(char *masterKey, char *pathToFile) {
     char *keyContent = NULL;
     getContentOfKey(masterKey, &sizeKey, &keyContent);
 
-
     //encrypt data
     cryptData *encryptedBinData;
     encryptedBinData = encryptBinDataInMemory(keyContent, sizeData, inputData);
@@ -55,7 +54,26 @@ void encrypt(char *masterKey, char *pathToFile) {
 }
 
 void decrypt(char *masterKey, char *pathToFile) {
+    char *newFile = "C:\\crypt\\newfile.decrypted";
+    int sizeData = 0;
+    char *inputData = NULL;
 
+    //read file
+    readBinDataFromFile(pathToFile, &inputData, &sizeData);
+
+    //Key stuff
+    int sizeKey = 0;
+    char *keyContent = NULL;
+    getContentOfKey(masterKey, &sizeKey, &keyContent);
+
+    //decrypt data
+    cryptData *decryptedBinData;
+    decryptedBinData = decryptBinDataInMemory(keyContent, sizeData, inputData);
+
+    //write new file
+    char *encryptedData = decryptedBinData->binData;
+    int sizeEncryptedData = decryptedBinData->len;
+    writeBinDataToFile(newFile, encryptedData, sizeEncryptedData);
 }
 
 //ToDo create function to create magickey
