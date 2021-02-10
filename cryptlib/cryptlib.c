@@ -43,13 +43,11 @@ void encrypt(char *masterKey, char *pathToFile) {
     encryptedBinData = encryptBinDataInMemory(keyContent, sizeData, inputData);
 
     //write new file
-    char *encryptedData = encryptedBinData->binData;
-    int sizeEncryptedData = encryptedBinData->len;
-    writeBinDataToFile(newFile, encryptedData, sizeEncryptedData);
+    writeBinDataToFile(newFile, encryptedBinData->binData, encryptedBinData->len);
 
     //Clearing Memory
     free(inputData);
-    free(encryptedData);
+    free(encryptedBinData);
     free(keyContent);
 }
 
@@ -71,13 +69,11 @@ void decrypt(char *masterKey, char *pathToFile) {
     decryptedBinData = decryptBinDataInMemory(keyContent, sizeData, inputData);
 
     //write new file
-    char *decryptedData = decryptedBinData->binData;
-    int sizeDecryptedData = decryptedBinData->len;
-    writeBinDataToFile(newFile, decryptedData, sizeDecryptedData);
+    writeBinDataToFile(newFile, decryptedBinData->binData, decryptedBinData->len);
 
     //Clearing Memory
     free(inputData);
-    free(decryptedData);
+    free(decryptedBinData);
     free(keyContent);
 }
 

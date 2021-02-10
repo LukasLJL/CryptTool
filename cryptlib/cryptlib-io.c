@@ -11,7 +11,7 @@ void catchMemoryAllocationFailure(void *ptr) {
 
 void readBinDataFromFile(char *pathToFile, char **data, int *size) {
     FILE *pFile;
-    int fileContentSize = 0;
+    int fileContentSize;
 
     //reads file in binary mode
     pFile = fopen(pathToFile, "rb");
