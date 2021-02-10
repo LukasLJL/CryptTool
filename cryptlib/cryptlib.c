@@ -71,9 +71,14 @@ void decrypt(char *masterKey, char *pathToFile) {
     decryptedBinData = decryptBinDataInMemory(keyContent, sizeData, inputData);
 
     //write new file
-    char *encryptedData = decryptedBinData->binData;
-    int sizeEncryptedData = decryptedBinData->len;
-    writeBinDataToFile(newFile, encryptedData, sizeEncryptedData);
+    char *decryptedData = decryptedBinData->binData;
+    int sizeDecryptedData = decryptedBinData->len;
+    writeBinDataToFile(newFile, decryptedData, sizeDecryptedData);
+
+    //Clearing Memory
+    free(inputData);
+    free(decryptedData);
+    free(keyContent);
 }
 
 //ToDo create function to create magickey
