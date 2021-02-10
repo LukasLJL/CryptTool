@@ -7,7 +7,7 @@ char *osTyp = "Linux";
 char *pathToKey = "/CryptTool/MAGIC.KEY";
 #elif _WIN64
 char *osTyp = "Windows";
-char *pathToKey = ":/CryptTool/MAGIC.KEY";
+char *pathToKey = ":\\CryptTool\\MAGIC.KEY";
 #else
 char *osTyp = "Unkown";
 #endif
@@ -36,8 +36,13 @@ void getAllDrives(char drives[][20]) {
             int i = 0;
             //Clear the current String
             memset(drives[driveCounter], 0, sizeof(drives[driveCounter]));
+            drives[driveCounter][0] =  '/';
+            drives[driveCounter][1] =  'm';
+            drives[driveCounter][2] =  'n';
+            drives[driveCounter][3] =  't';
+            drives[driveCounter][4] =  '/';
             while (cmd_results[i] != '\n') {
-                drives[driveCounter][i] = cmd_results[i];
+                drives[driveCounter][i+5] = cmd_results[i];
                 i++;
             }
             driveCounter++;
