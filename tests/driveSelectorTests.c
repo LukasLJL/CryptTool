@@ -13,7 +13,7 @@ int main() {
     getAllDrives(test);
     for (int i = 0; i < numberOfDrives; i++) {
         //Print DriveLetters test
-        for (int k = 0; k < strlen(test[numberOfDrives]); k++) {
+        for (int k = 0; k < strlen(test[i]); k++) {
             printf("%c", test[i][k]);
         }
         printf("\n");
