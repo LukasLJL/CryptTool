@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "cript-permutation.h"
+#include "crypt-permutation.h"
 #include "cryptlib-io.h"
 #include "crypt-components.h"
 

@@ -2,8 +2,8 @@
 // Created by GROSA5 on 2/4/2021.
 //
 
-#ifndef CRYPT_TOOL_CRIPT_PERMUTATION_H
-#define CRYPT_TOOL_CRIPT_PERMUTATION_H
+#ifndef CRYPT_TOOL_CRYPT_PERMUTATION_H
+#define CRYPT_TOOL_CRYPT_PERMUTATION_H
 
 int *getUnitOfOffset(const char *);
 int* getOffsetMap(const char *);
@@ -15,4 +15,4 @@ void *unpermute(void *, char *, size_t);
 void *unpermuteFromMap(void *, const int *, size_t);
 void* createCopy(void *, size_t);
 
-#endif //CRYPT_TOOL_CRIPT_PERMUTATION_H
+#endif //CRYPT_TOOL_CRYPT_PERMUTATION_H

@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include "../munit/munit.h"
-#include "../cryptlib/cript-permutation.h"
+#include "../cryptlib/crypt-permutation.h"
 #include "../cryptlib/crypt-translate.h"
 #include "../cryptlib/crypt-components.h"
 #include "../cryptlib/cryptlib.h"

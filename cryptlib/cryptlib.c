@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 #include "cryptlib.h"
-#include "cript-permutation.h"
+#include "crypt-permutation.h"
 #include "crypt-translate.h"
 
 cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
