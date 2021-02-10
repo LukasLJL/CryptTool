@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "cript-permutation.h"
 #include "cryptlib-io.h"
-#include "crypt-translate.h"
+#include "crypt-components.h"
 
 #define OFFSET_ARRAY_LEN 4
 #define OFFSET_SEED 720
