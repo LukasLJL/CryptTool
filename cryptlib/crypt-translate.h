@@ -6,8 +6,9 @@
 #define CRYPT_TOOL_CRYPT_TRANSLATE_H
 
 int getOffsetSeed(const char *);
-unsigned char translateChar(unsigned char, int);
-int hashKey(const char *);
-void *translate(void *, char *, size_t);
+void translateChar(void *, int);
+void *translate(void *binData, char *key, size_t len);
+void *untranslate(void *binData, char *key, size_t len);
+void *translateAll(void *, int, size_t);
 
 #endif //CRYPT_TOOL_CRYPT_TRANSLATE_H
