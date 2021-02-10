@@ -6,9 +6,8 @@
 #include <stdio.h>
 #include "cript-permutation.h"
 #include "cryptlib-io.h"
+#include "crypt-translate.h"
 
-#define MAX_HASH_SIZE 100000000
-#define HASH_SEED 82638153
 #define OFFSET_ARRAY_LEN 4
 #define OFFSET_SEED 720
 
@@ -55,19 +54,6 @@ void* createCopy(void *ptrData, size_t len){
     }
 
     return copy;
-}
-
-int hashKey(const char *keySting) {
-    // convert keyAsInt from String to int
-    int keyAsInt = 0;
-    int keyIndex = 0;
-    while (keySting[keyIndex] != '\0') {
-        keyIndex++;
-        keyAsInt += 7 * keySting[keyIndex];
-    }
-
-    // permute it and ensure a size of 8 digits and positive
-    return abs((keyAsInt) ^ (keyAsInt * HASH_SEED) % MAX_HASH_SIZE);
 }
 
 int *getOffsetMap(const char *key) {
