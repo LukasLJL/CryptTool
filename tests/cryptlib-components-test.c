@@ -7,6 +7,7 @@
 #include "../cryptlib/cript-permutation.h"
 #include "../cryptlib/crypt-translate.h"
 #include "../cryptlib/crypt-components.h"
+#include "../cryptlib/cryptlib.h"
 
 
 void resetArray(int currentArray[], const int defaultArray[], int len){
@@ -50,7 +51,7 @@ MunitResult canGenerateOffsetMap(const MunitParameter *params, void *user_data) 
             checksum += offsetMap[4*i + j];
         }
     }
-    munit_assert_int(120, ==, checksum);
+    munit_assert_int(136, ==, checksum);
     return MUNIT_OK;
 }
 MunitResult canPermuteRow(const MunitParameter *params, void *user_data) {
@@ -181,13 +182,22 @@ MunitResult canTranslateChars(const MunitParameter *params, void *user_data) {
     return MUNIT_OK;
 }
 MunitResult canTranslate(const MunitParameter *params, void *user_data) {
-    int offsetSeed = 2;
     char startString[] = "Hello World! IT";
 
     void *encyptedString = translate(startString, "ultrabossAmos", sizeof startString);
     munit_assert_memory_not_equal(sizeof startString, encyptedString, startString);
     void *decyptedString = untranslate(encyptedString, "ultrabossAmos", sizeof startString);
     munit_assert_memory_equal(sizeof startString, decyptedString, startString);
+
+    return MUNIT_OK;
+}
+MunitResult encryptionWorks(const MunitParameter *params, void *user_data) {
+    char startString[] = "Hello World! IT's a me, amosio.....";
+
+    cryptData *encyptedString = encryptBinDataInMemory("ultrabossAmos", sizeof startString, startString);
+    munit_assert_memory_not_equal(sizeof startString, encyptedString->binData, startString);
+    cryptData *decyptedString = decryptBinDataInMemory("ultrabossAmos", sizeof startString, encyptedString->binData);
+    munit_assert_memory_equal(sizeof startString, decyptedString->binData, startString);
 
     return MUNIT_OK;
 }
@@ -286,6 +296,14 @@ MunitTest tests[] = {
         {
                 "/can_translate",
                 canTranslate,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_encrypt",
+                encryptionWorks,
                 NULL,
                 NULL,
                 MUNIT_TEST_OPTION_NONE,

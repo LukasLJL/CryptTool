@@ -7,11 +7,12 @@
 #include "crypt-components.h"
 
 int getOffsetSeed(const char *key) {
-    return hashKey(key) % 255;
+    return hashKey(key) % 254;
 }
 
 void translateChar(void *byte, int seed) {
-    *((unsigned char *) byte) = *((unsigned char *) byte) + seed;
+    unsigned char *ptrByteValue = ((unsigned char *) byte);
+    *ptrByteValue = *ptrByteValue + seed;
 }
 
 void *translate(void *binData, char *key, size_t len) {

@@ -18,6 +18,7 @@ typedef struct {
 } cryptData;
 
 cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData);
+
 cryptData *decryptBinDataInMemory(char *key, size_t len, void *binData);
 
 #endif //CRYPT_TOOL_CRYPTLIB_H

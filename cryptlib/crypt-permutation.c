@@ -12,10 +12,12 @@
 #define OFFSET_SEED 720
 
 void *permute(void *ptrData, char *key, size_t len){
-    return permuteFromMap(ptrData, getOffsetMap(key), len);
+    int *offsetMap = getOffsetMap(key);
+    return permuteFromMap(ptrData, offsetMap, len);
 }
 void *unpermute(void *ptrData, char *key, size_t len){
-    return unpermuteFromMap(ptrData, getOffsetMap(key), len);
+    int *offsetMap = getOffsetMap(key);
+    return unpermuteFromMap(ptrData, offsetMap, len);
 }
 
 void *permuteFromMap(void *ptrData, const int *offSetMap, size_t len){
@@ -47,7 +49,7 @@ int *getOffsetMap(const char *key) {
 
     // default initialize array
     for (int defaultIndex = 0; defaultIndex < OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN; defaultIndex++) {
-        *(map + defaultIndex) = defaultIndex;
+        *(map + defaultIndex) = defaultIndex + 1;
     }
 
     int *offset = getUnitOfOffset(key);
