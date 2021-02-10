@@ -5,6 +5,10 @@
 #ifndef CRYPT_TOOL_CRYPTLIB_IO_H
 #define CRYPT_TOOL_CRYPTLIB_IO_H
 
-void catchMemoryAllocationFailure(void*);
+void catchMemoryAllocationFailure(void *);
+
+void readBinDataFromFile(char *, char **, int *);
+
+void writeBinDataToFile(char *, char *, int);
 
 #endif //CRYPT_TOOL_CRYPTLIB_IO_H

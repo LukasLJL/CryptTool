@@ -3,19 +3,26 @@
 //
 
 #ifndef CRYPT_TOOL_CRYPTLIB_H
+
+#include "cryptlib-io.h"
+
 #define CRYPT_TOOL_CRYPTLIB_H
 
 void encrypt_test(char *key, char *path, void *algorithm(char *));
-void decrypt_test(char *key, char *path, void *algorithm(char *));
 
-void encrypt(char *key, char *path);
-void decrypt(char *key, char *path);
+void decrypt_test(char *key, char *path, void *algorithm(char *));
 
 // internal prototypes
 typedef struct {
     void *binData;
     size_t len;
 } cryptData;
+
+void getContentOfKey(const char *, int *, char **);
+
+void encrypt(char *key, char *path);
+
+void decrypt(char *key, char *path);
 
 cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData);
 
