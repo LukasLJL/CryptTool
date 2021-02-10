@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include "../munit/munit.h"
 #include "../cryptlib/cript-permutation.h"
+#include "../cryptlib/crypt-translate.h"
+#include "../cryptlib/crypt-components.h"
+
 
 void resetArray(int currentArray[], const int defaultArray[], int len){
     for (int index = 0; index < len; index++){
@@ -144,6 +147,52 @@ MunitResult canCreateCopy(const MunitParameter *params, void *user_data) {
 
     return MUNIT_OK;
 }
+MunitResult canCreateOffsetSeed(const MunitParameter *params, void *user_data) {
+    char key[20];
+    genKey(key);
+    int offsetSeed = getOffsetSeed(key);
+
+    munit_assert_int(offsetSeed, <, 255);
+    munit_assert_int(offsetSeed, >, 0);
+
+    return MUNIT_OK;
+}
+MunitResult canTranslateChar(const MunitParameter *params, void *user_data) {
+    int offsetSeed = 2;
+    unsigned char testChar1 = 255;
+    unsigned char testChar2 = 1;
+
+    translateChar(&testChar1, offsetSeed);
+    munit_assert_uchar(testChar1, ==, 1);
+
+    translateChar(&testChar2, offsetSeed);
+    munit_assert_uchar(testChar2, ==, 3);
+
+    return MUNIT_OK;
+}
+MunitResult canTranslateChars(const MunitParameter *params, void *user_data) {
+    int offsetSeed = 2;
+    unsigned char testChars[] = {1, 255, 7};
+    unsigned char expectedChars[] = {3, 1, 9};
+
+    void *endChars = translateAll(testChars, offsetSeed, sizeof testChars);
+    munit_assert_memory_equal(sizeof expectedChars, endChars, expectedChars);
+
+    return MUNIT_OK;
+}
+MunitResult canTranslate(const MunitParameter *params, void *user_data) {
+    int offsetSeed = 2;
+    char startString[] = "Hello World! IT";
+
+    void *encyptedString = translate(startString, "ultrabossAmos", sizeof startString);
+    munit_assert_memory_not_equal(sizeof startString, encyptedString, startString);
+    void *decyptedString = untranslate(encyptedString, "ultrabossAmos", sizeof startString);
+    munit_assert_memory_equal(sizeof startString, decyptedString, startString);
+
+    return MUNIT_OK;
+}
+
+
 
 MunitTest tests[] = {
         {
@@ -205,6 +254,38 @@ MunitTest tests[] = {
         {
                 "/can_unpermute",
                 canUnpermute,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_gen_offset_seed",
+                canCreateOffsetSeed,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_translate_char",
+                canTranslateChar,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_translate_chars",
+                canTranslateChars,
+                NULL,
+                NULL,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                "/can_translate",
+                canTranslate,
                 NULL,
                 NULL,
                 MUNIT_TEST_OPTION_NONE,

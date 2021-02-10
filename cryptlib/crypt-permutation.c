@@ -39,23 +39,6 @@ void *unpermuteFromMap(void *ptrData, const int *offSetMap, size_t len){
     return unpermutedArray;
 }
 
-void* createCopy(void *ptrData, size_t len){
-    int differenceToBlock = OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN - (int) len % (OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN);
-
-    // copy existing data
-    void *copy = malloc(len + differenceToBlock);
-    for (int index = 0; index < len; index++){
-        *(((char *)copy) + index) = *(((char *)ptrData) + index);
-    }
-
-    // initialize remaining data to 0
-    for (int index = 0; index < differenceToBlock; index++){
-        *(((char *)copy) + index + (int) len) = 0;
-    }
-
-    return copy;
-}
-
 int *getOffsetMap(const char *key) {
     int *map = malloc(sizeof(int) * OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN);
 
@@ -83,7 +66,7 @@ void performOffsetColumn(int *matrixPtr, int permutationLen, int colPos) {
         colCopy[index] = matrixPtr[index];
     }
 
-    // translate permutation
+    // translateAll permutation
     for (int colIndex = 0; colIndex < OFFSET_ARRAY_LEN; colIndex++) {
         int newIndex = ((colIndex + permutationLen) % OFFSET_ARRAY_LEN) * OFFSET_ARRAY_LEN + colPos;
         matrixPtr[newIndex] = colCopy[colIndex * OFFSET_ARRAY_LEN + colPos];
@@ -97,7 +80,7 @@ void performOffsetRow(int *rowPtr, int permutationLen) {
         rowCopy[rowIndex] = rowPtr[rowIndex];
     }
 
-    // translate permutation
+    // translateAll permutation
     for (int rowIndex = 0; rowIndex < OFFSET_ARRAY_LEN; rowIndex++) {
         int newIndex = (rowIndex + permutationLen) % OFFSET_ARRAY_LEN;
         rowPtr[newIndex] = rowCopy[rowIndex];
