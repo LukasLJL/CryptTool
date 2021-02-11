@@ -26,8 +26,7 @@ cryptData *decryptBinDataInMemory(char *key, size_t len, void *binData) {
 }
 
 void encrypt(char *masterKey, char *pathToFile) {
-    char *newFile = "C:\\crypt\\newfile.encrypted";
-    //strcat(pathToFile, "_encrypted");
+    char *newFile = getNewEncryptedFileName(pathToFile);
     int sizeData = 0;
     char *inputData = NULL;
     //read file
@@ -52,7 +51,7 @@ void encrypt(char *masterKey, char *pathToFile) {
 }
 
 void decrypt(char *masterKey, char *pathToFile) {
-    char *newFile = "C:\\crypt\\newfile.decrypted";
+    char *newFile =getNewDecryptedFileName(pathToFile);
     int sizeData = 0;
     char *inputData = NULL;
 
@@ -99,3 +98,4 @@ void getContentOfKey(const char *masterKeyPath, int *size, char **masterKeyConte
     }
     fclose(pFile);
 }
+

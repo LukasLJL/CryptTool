@@ -1,4 +1,4 @@
 add_executable(cryptlib-components cryptlib-components-test.c ../cryptlib/crypt-permutation.c ../cryptlib/cryptlib-io.c ../munit/munit.c ../cryptlib/cryptlib.h ../cryptlib/cryptlib.c ../cryptlib/crypt-translate.c ../cryptlib/crypt-translate.h ../cryptlib/cryptlib-components.c ../cryptlib/crypt-components.h)
 add_executable(driveSelectorTest driveSelectorTests.c ../src/driveSelector.h ../src/driveSelector.c)
-add_executable(cryptlibTest cryptlib_test.c ../cryptlib/crypt-permutation.c ../cryptlib/cryptlib-io.h ../cryptlib/cryptlib-io.c ../cryptlib/cryptlib.h ../cryptlib/cryptlib.c ../cryptlib/crypt-translate.c ../cryptlib/crypt-translate.h ../cryptlib/cryptlib-components.c ../cryptlib/crypt-components.h)
+add_executable(cryptlibTest cryptlib_test.c ../src/driveSelector.c ../src/driveSelector.h ../cryptlib/crypt-permutation.c ../cryptlib/cryptlib-io.h ../cryptlib/cryptlib-io.c ../cryptlib/cryptlib.h ../cryptlib/cryptlib.c ../cryptlib/crypt-translate.c ../cryptlib/crypt-translate.h ../cryptlib/cryptlib-components.c ../cryptlib/crypt-components.h)
 add_executable(cryptIoTest cryptIo_test.c ../cryptlib/cryptlib-io.h ../cryptlib/cryptlib-io.c)

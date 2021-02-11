@@ -2,8 +2,8 @@
 #include "../cryptlib/cryptlib.h"
 
 #define PATH_TO_KEY "C:\\crypt\\key.dat"
-#define FILE_TO_ENCRYPT "C:\\crypt\\test.txt"
-#define FILE_TO_DECRYPT "C:\\crypt\\newfile.encrypted"
+#define FILE_TO_ENCRYPT "C:\\crypt\\IMG_1402_edit.jpg"
+#define FILE_TO_DECRYPT "C:\\crypt\\IMG_1402_edit.jpg.encrypted"
 
 
 int main() {
