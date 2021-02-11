@@ -200,6 +200,7 @@ MunitResult encryptionWorks(const MunitParameter *params, void *user_data) {
     printf("%s", (char* ) encyptedString->binData);
     cryptData *decyptedString = decryptBinDataInMemory("ultrabossAmos", encyptedString->len, encyptedString->binData);
     munit_assert_memory_equal(sizeof startString, decyptedString->binData, startString);
+    printf("%s", (char* ) decyptedString->binData);
 
     return MUNIT_OK;
 }
