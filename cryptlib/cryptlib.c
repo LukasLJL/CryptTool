@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include "cryptlib.h"
 #include "crypt-permutation.h"
@@ -35,7 +34,7 @@ void encrypt(char *masterKey, char *pathToFile) {
     //Key stuff
     int sizeKey = 0;
     char *keyContent = NULL;
-    getContentOfKey(masterKey, &sizeKey, &keyContent);
+    readBinDataFromFile(masterKey, &keyContent, &sizeKey);
 
     //encrypt data
     cryptData *encryptedBinData;
@@ -61,7 +60,7 @@ void decrypt(char *masterKey, char *pathToFile) {
     //Key stuff
     int sizeKey = 0;
     char *keyContent = NULL;
-    getContentOfKey(masterKey, &sizeKey, &keyContent);
+    readBinDataFromFile(masterKey, &keyContent, &sizeKey);
 
     //decrypt data
     cryptData *decryptedBinData;
@@ -74,28 +73,5 @@ void decrypt(char *masterKey, char *pathToFile) {
     free(inputData);
     free(decryptedBinData);
     free(keyContent);
-}
-
-//ToDo create function to create magickey
-
-void getContentOfKey(const char *masterKeyPath, int *size, char **masterKeyContent) {
-    FILE *pFile;
-
-    //ToDo maybe change to text mode
-    pFile = fopen(masterKeyPath, "rb");
-
-    if (pFile == NULL) {
-        printf((const char *) stderr, "Could not open key file...");
-    } else {
-        fseek(pFile, 0, SEEK_END);
-        int fileSize = ftell(pFile);
-        *size = fileSize;
-        *masterKeyContent = malloc(fileSize);
-        rewind(pFile);
-        while (!feof(pFile)) {
-            fread(*masterKeyContent, fileSize, 1, pFile);
-        }
-    }
-    fclose(pFile);
 }
 

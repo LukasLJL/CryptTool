@@ -18,8 +18,6 @@ typedef struct {
     size_t len;
 } cryptData;
 
-void getContentOfKey(const char *, int *, char **);
-
 void encrypt(char *key, char *path);
 
 void decrypt(char *key, char *path);
