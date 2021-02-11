@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "../cryptlib/cryptlib.h"
 
-#define PATH_TO_KEY "C:\\crypt\\key.dat"
-#define FILE_TO_ENCRYPT "C:\\crypt\\IMG_1402_edit.jpg"
-#define FILE_TO_DECRYPT "C:\\crypt\\newfile.encrypted"
+#define PATH_TO_KEY "C:\\Users\\GROSA5\\OneDrive - NTT DATA EMEA\\Projects\\pass.txt"
+#define FILE_TO_ENCRYPT "C:\\Users\\GROSA5\\OneDrive - NTT DATA EMEA\\Projects\\hello.txt"
+#define FILE_TO_DECRYPT "C:\\Users\\GROSA5\\OneDrive - NTT DATA EMEA\\Projects\\hello.txt"
 
 
 int main() {

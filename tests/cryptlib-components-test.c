@@ -165,6 +165,7 @@ MunitResult canTranslateChar(const MunitParameter *params, void *user_data) {
 
     translateChar(&testChar1, offsetSeed);
     munit_assert_uchar(testChar1, ==, 1);
+    translateChar(&testChar1, offsetSeed);
 
     translateChar(&testChar2, offsetSeed);
     munit_assert_uchar(testChar2, ==, 3);

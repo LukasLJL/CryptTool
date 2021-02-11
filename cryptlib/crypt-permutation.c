@@ -9,7 +9,7 @@
 #include "crypt-components.h"
 
 #define OFFSET_ARRAY_LEN 4
-#define OFFSET_SEED 720
+#define OFFSET_SEED 722
 
 void *permute(void *ptrData, char *key, size_t len){
     int *offsetMap = getOffsetMap(key);
@@ -98,6 +98,7 @@ int *getUnitOfOffset(const char *key) {
 
     // set values for array between 0 and OFFSET_ARRAY_LEN
     for (int offsetIndex = 0; offsetIndex < OFFSET_ARRAY_LEN; offsetIndex++) {
+        int offset = abs((keyHash + offsetIndex)* OFFSET_SEED % OFFSET_ARRAY_LEN);
         offsetArray[offsetIndex] = abs((keyHash * (offsetIndex + OFFSET_SEED)) % OFFSET_ARRAY_LEN);
     }
 

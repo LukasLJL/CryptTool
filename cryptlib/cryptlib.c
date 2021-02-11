@@ -11,17 +11,17 @@ cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
 //    free(permutedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = translatedData;
-    data->len = len;
+    data->len = len  + (16 - (len % 16));
     return data;
 }
 
 cryptData *decryptBinDataInMemory(char *key, size_t len, void *binData) {
-    void *untranslatedData = untranslate(binData, key, len);
-    void *unpermutedData = unpermute(untranslatedData, key, len);
+//    void *untranslatedData = untranslate(binData, key, len);
+    void *unpermutedData = unpermute(binData, key, len);
 //    free(unpermutedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = unpermutedData;
-    data->len = len;
+    data->len = len  + (16 - (len % 16));
     return data;
 }
 

@@ -16,10 +16,12 @@ void translateChar(void *byte, int seed) {
 }
 
 void *translate(void *binData, char *key, size_t len) {
+    int offset = getOffsetSeed(key);
     return translateAll(binData, getOffsetSeed(key), len);
 }
 
 void *untranslate(void *binData, char *key, size_t len) {
+    int offset = getOffsetSeed(key) * (-1);
     return translateAll(binData, getOffsetSeed(key) * (-1), len);
 }
 
