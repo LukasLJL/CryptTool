@@ -54,7 +54,7 @@ void writeBinDataToFile(char *pathToFile, char *data, int size) {
 
 char *getNewEncryptedFileName(char *pathToFile) {
     char *newName = ".encrypted";
-    char *newFile;
+    char *newFile = malloc(sizeof(char) * 256);
     strcpy(newFile, pathToFile);
     strcat(newFile, newName);
     return newFile;
@@ -95,7 +95,8 @@ char *getNewDecryptedFileName(char *pathToFile) {
     strncat(newFileName, pathToFile, lastDot);
     strncat(newPath, pathToFile, lastSlash);
     createNewFolder(newPath, newFolderName);
-    strcat(newPath, "\\");
+    if (strcmp(getOSTyp(), "Windows") == 0) strcat(newPath, "\\");
+    if (strcmp(getOSTyp(), "Linux") == 0) strcat(newPath, "/");
     strcat(newPath, newFolderName);
     strcat(newPath, newFileName + lastSlash);
 
