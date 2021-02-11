@@ -47,6 +47,7 @@ void encrypt(char *masterKey, char *pathToFile) {
     free(inputData);
     free(encryptedBinData);
     free(keyContent);
+    free(newFile);
 }
 
 void decrypt(char *masterKey, char *pathToFile) {
@@ -73,5 +74,6 @@ void decrypt(char *masterKey, char *pathToFile) {
     free(inputData);
     free(decryptedBinData);
     free(keyContent);
+    free(newFile);
 }
 
