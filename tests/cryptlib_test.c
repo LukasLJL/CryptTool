@@ -3,7 +3,7 @@
 
 #define PATH_TO_KEY "C:\\Users\\GROSA5\\OneDrive - NTT DATA EMEA\\Projects\\pass.txt"
 #define FILE_TO_ENCRYPT "C:\\Users\\GROSA5\\OneDrive - NTT DATA EMEA\\Projects\\hello.txt"
-#define FILE_TO_DECRYPT "C:\\Users\\GROSA5\\OneDrive - NTT DATA EMEA\\Projects\\hello.txt"
+#define FILE_TO_DECRYPT "C:\\crypt\\newfile.encrypted"
 
 
 int main() {
