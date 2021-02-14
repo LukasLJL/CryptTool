@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "cryptlib.h"
 #include "crypt-permutation.h"
 #include "crypt-translate.h"

@@ -18,4 +18,6 @@ char *getNewDecryptedFileName(char *);
 
 void createNewFolder(char *, char *);
 
+void generateKey(char *);
+
 #endif //CRYPT_TOOL_CRYPTLIB_IO_H
