@@ -126,9 +126,10 @@ void createNewFolder(char *currentPath, char *folderName) {
     free(command);
 }
 
-void generateKey(char *keyPath){
+void generateKeyFile(char *keyPath){
     // TODO implement for linux
     FILE *keyFile = fopen(keyPath, "w");
     srand(time(NULL));
     fprintf(keyFile, "hereIsYourKey%d", rand());
+    fclose(keyFile);
 }
