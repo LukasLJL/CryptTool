@@ -193,14 +193,12 @@ MunitResult canTranslate(const MunitParameter *params, void *user_data) {
     return MUNIT_OK;
 }
 MunitResult encryptionWorks(const MunitParameter *params, void *user_data) {
-    char startString[] = "Hello World! IT's a me, amosio.....";
+    char startString[] = "Hello World! IT's a me, amosio\0\0\0\0";
 
     cryptData *encyptedString = encryptBinDataInMemory("ultrabossAmos", sizeof startString, startString);
     munit_assert_memory_not_equal(sizeof startString, encyptedString->binData, startString);
     cryptData *decyptedString = decryptBinDataInMemory("ultrabossAmos", encyptedString->len, encyptedString->binData);
     munit_assert_memory_equal(sizeof startString, decyptedString->binData, startString);
-    printf("%s", (char* ) encyptedString->binData);
-    printf("%s", (char* ) decyptedString->binData);
 
     return MUNIT_OK;
 }
