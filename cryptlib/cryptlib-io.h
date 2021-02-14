@@ -4,6 +4,7 @@
 
 #ifndef CRYPT_TOOL_CRYPTLIB_IO_H
 #define CRYPT_TOOL_CRYPTLIB_IO_H
+#include "../src/driveSelector.h"
 
 void catchMemoryAllocationFailure(void *);
 

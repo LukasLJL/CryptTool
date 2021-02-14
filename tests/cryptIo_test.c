@@ -3,13 +3,19 @@
 #include <string.h>
 #include "../cryptlib/cryptlib-io.h"
 
+
+#ifdef __linux
+#define PATH_TO_KEY "/mnt/c/crypt/key.dat"
+#define FILE "/mnt/c/crypt/testfile.blub"
+#define NEW_FILE "/mnt/c/crypt/newfile.bin"
+#elif _WIN64
+#define PATH_TO_KEY "C:\\crypt\\key.dat"
+#define FILE "C:\\crypt\\testfile.blub"
+#define NEW_FILE "C:\\crypt\\newfile.bin"
+#endif
+
 void readTest();
 void writeTest();
-
-//Testing Variables
-char *pathToKey = "C:\\crypt\\key.dat";
-char *file = "C:\\crypt\\testfile.blub";
-char *newFile = "C:\\crypt\\newfile.bin";
 
 int main() {
     printf("-------- CryptIo Tests --------\n");
@@ -21,7 +27,7 @@ void readTest() {
     printf("  --- Test Read Function ---\n");
     char *data = NULL;
     int size = 0;
-    readBinDataFromFile(file, &data, &size);
+    readBinDataFromFile(FILE, &data, &size);
     printf("Content of file:\n");
     for (int i = 0; i < size; i++) {
         printf("%c", data[i]);
@@ -32,7 +38,7 @@ void readTest() {
 }
 
 void writeTest() {
-    printf("  --- Test Read Function ---\n");
+    printf("  --- Test Write Function ---\n");
     char *test = "test";
-    writeBinDataToFile(newFile, test, strlen(test));
+    writeBinDataToFile(NEW_FILE, test, strlen(test));
 }

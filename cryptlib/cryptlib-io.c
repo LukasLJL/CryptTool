@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../src/driveSelector.h"
 #include "cryptlib-io.h"
 
 void catchMemoryAllocationFailure(void *ptr) {
