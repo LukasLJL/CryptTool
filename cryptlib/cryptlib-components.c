@@ -12,13 +12,19 @@ int hashKey(const char *keySting) {
     // convert keyAsInt from String to int
     int keyAsInt = 0;
     int keyIndex = 0;
-    while (keySting[keyIndex] != '\0') {
+    while (keySting[keyIndex] != '\0' || keyIndex < 28) {
         keyIndex++;
         keyAsInt += 7 * keySting[keyIndex];
     }
 
     // permute it and ensure a size of 8 digits and positive
-    return abs((keyAsInt) ^ (keyAsInt * HASH_SEED) % MAX_HASH_SIZE);
+    int hash = abs((keyAsInt) ^ (keyAsInt * HASH_SEED) % MAX_HASH_SIZE);
+
+    //make sure it can't be divided by HASH_SEED
+    if (hash % HASH_SEED == 0){
+        return hash + 1;
+    }
+    return hash;
 }
 
 void* createCopy(void *ptrData, size_t len){
