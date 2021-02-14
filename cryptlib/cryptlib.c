@@ -10,7 +10,8 @@ cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
 //    free(permutedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = translatedData;
-    data->len = len  + (16 - ((len % 16)) % 16);
+    data->len = len;
+    //data->len = len  + (16 - ((len % 16)) % 16);
     return data;
 }
 

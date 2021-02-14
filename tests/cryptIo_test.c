@@ -39,6 +39,8 @@ void readTest() {
 
 void writeTest() {
     printf("  --- Test Write Function ---\n");
-    char *test = "test";
-    writeBinDataToFile(NEW_FILE, test, strlen(test));
+    char *test = NULL;
+    int size = 0;
+    readBinDataFromFile(FILE, &test, &size);
+    writeBinDataToFile(NEW_FILE, test, size);
 }
