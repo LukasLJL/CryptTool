@@ -3,8 +3,6 @@
 #include <string.h>
 #include "../cryptlib/cryptlib-io.h"
 #include "../cryptlib/cryptlib.h"
-//ToDo Text in Englisch schreiben.
-//ToDo Fehler abfangen bei eingabe.
 
 int main(void)
 {
