@@ -1,7 +1,3 @@
-//
-// Created by GROSA5 on 2/14/2021.
-//
-
 #include "cryptlib-implementation-test.h"
 #include "../cryptlib/cryptlib.h"
 #include <stdio.h>
