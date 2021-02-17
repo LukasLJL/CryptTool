@@ -20,6 +20,7 @@ int main(void)
     printf("Select CryptMode:\n");
     printf("(1) Encrypt\n");
     printf("(2) Decrypt\n");
+    printf("(3) Create Key\n");
 
     //Selection for CryptMode
     scanf("%d", &selectionCryptMode);
@@ -45,10 +46,10 @@ int main(void)
     getMasterKeyPath(drive[writeDrivePos], writeKeyFilePath);
 
     //Write Path include file without the quotations: "C:\CryptTool\MAGIC.KEY"
-    printf("Path for the encrypted / decrypted file:\n");
+    printf("Path for the file:\n");
     scanf("%s", &writePathEncryptDecrypt);
 
-    //Encrypt / Decrypt Mode
+    //Encrypt / Decrypt Mode / Create Key
     if(selectionCryptMode == 1)
     {
         encrypt(writeKeyFilePath, writePathEncryptDecrypt);
@@ -56,5 +57,9 @@ int main(void)
     else if(selectionCryptMode == 2)
     {
         decrypt(writeKeyFilePath, writePathEncryptDecrypt);
+    }
+    else if(selectionCryptMode == 3)
+    {
+        generateKeyFile(writeKeyFilePath);
     }
 }
