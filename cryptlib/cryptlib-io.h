@@ -16,4 +16,6 @@ void createNewFolder(char *, char *);
 
 void generateKeyFile(char *);
 
+int getRealLength(void *, int);
+
 #endif //CRYPT_TOOL_CRYPTLIB_IO_H

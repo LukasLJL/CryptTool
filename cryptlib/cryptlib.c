@@ -82,7 +82,8 @@ void decrypt(char *masterKey, char *pathToFile) {
     decryptedBinData = decryptBinDataInMemory(keyContent, sizeData, inputData);
 
     //write new file
-    writeBinDataToFile(newFile, decryptedBinData->binData, decryptedBinData->len);
+    int newFileSize = getRealLength(decryptedBinData->binData, decryptedBinData->len);
+    writeBinDataToFile(newFile, decryptedBinData->binData, newFileSize);
 
     //Clearing Memory
     free(inputData);
