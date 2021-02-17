@@ -120,7 +120,7 @@ void createNewFolder(char *currentPath, char *folderName) {
     } else if (strcmp(getOSTyp(), "Linux") == 0) {
         strcat(command, "mkdir ");
         strcat(command, folderName);
-        strcat(command, " >nul 2>&1");
+        strcat(command, " >/dev/null 2>&1");
     }
     system(command);
     free(command);

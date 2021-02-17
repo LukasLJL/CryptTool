@@ -3,15 +3,12 @@
 #include "driveSelector.h"
 
 #ifdef __linux
-char *osTyp = "Linux";
 char *pathToKey = "/CryptTool/MAGIC.KEY";
 #elif _WIN64
-char *osTyp = "Windows";
 char *pathToKey = ":\\CryptTool\\MAGIC.KEY";
 #else
 char *osTyp = "Unkown";
 #endif
-
 
 void getAllDrives(char drives[][20]) {
     FILE *fp;
@@ -87,6 +84,3 @@ void getMasterKeyPath_CharDriveLetter(char driveLetter, char *pathToMasterKey) {
     strcat(pathToMasterKey, pathToKey);
 }
 
-char *getOSTyp() {
-    return osTyp;
-}
