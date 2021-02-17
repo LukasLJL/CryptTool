@@ -11,7 +11,7 @@ int main(void)
 {
     int selectionCryptMode = 0;
     int numberOfDrives = getNumberOfDrives();
-    char writeDriveLetter[2];
+    int writeDrivePos;
     char writeKeyFilePath[100];
     char writePathEncryptDecrypt[100];
     char drive[numberOfDrives][20];
@@ -35,31 +35,26 @@ int main(void)
 
     if(selectionCryptMode == 1)
     {
-        printf("\nEnter drive letter, where keyfile is saved:\n");
-        scanf("%s", &writeDriveLetter);
+        printf("\nEingabe der Zahl, wo die KeyDatei ist:\n");
+        scanf("%d", &writeDrivePos);
 
-        printf("Enter Path, where keyfile is saved:\n");
-        scanf("%s", &writeKeyFilePath);
-
-        getMasterKeyPath(writeDriveLetter, writeKeyFilePath);
+        getMasterKeyPath(drive[writeDrivePos], writeKeyFilePath);
 
         printf("Path for the encryptfile:\n");
         scanf("%s", &writePathEncryptDecrypt);
 
+        encrypt(&writeKeyFilePath, &writePathEncryptDecrypt);
     }
     else if(selectionCryptMode == 2)
     {
         printf("\nEingabe von Laufwerksbuchstaben, wo die Key-Datei liegt:\n");
-        scanf("%s", &writeDriveLetter);
+        scanf("%s", &writeDrivePos);
 
-        printf("Eingabe von Pfad, wo die Key-Datei liegt:\n");
-        scanf("%s", &writeKeyFilePath);
-
-        getMasterKeyPath(writeDriveLetter, writeKeyFilePath);
+        getMasterKeyPath(drive[writeDrivePos], writeKeyFilePath);
 
         printf("Wo liegt die zu verschlüsselnde Datei:\n");
         scanf("%s", &writePathEncryptDecrypt);
 
-
+        decrypt(&writeKeyFilePath, &writePathEncryptDecrypt);
     }
 }
