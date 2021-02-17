@@ -17,7 +17,7 @@ void prtVoid(const char *ptr){
 
 cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
     void *permutedData = permute(binData, key, len);
-    len = len  + (16 - ((len % 16)) % 16);
+    len = len + (16 - ((len % 16)) % 16);
     void *translatedData = translate(permutedData, key, len);
     free(permutedData);
     cryptData *data = malloc(sizeof(cryptData));
@@ -64,7 +64,7 @@ void encrypt(char *masterKey, char *pathToFile) {
 }
 
 void decrypt(char *masterKey, char *pathToFile) {
-    char *newFile =getNewDecryptedFileName(pathToFile);
+    char *newFile = getNewDecryptedFileName(pathToFile);
     int sizeData = 0;
     char *inputData = NULL;
 
