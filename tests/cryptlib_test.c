@@ -5,7 +5,7 @@
 #define PATH_TO_KEY "/mnt/c/crypt/key.dat"
 #define FILE_TO_ENCRYPT "/mnt/c/crypt/test.txt"
 #define FILE_TO_DECRYPT "/mnt/c/crypt/test.txt.encrypted"
-#elif _WIN64
+#elif _WIN64 || __WIN32
 #define PATH_TO_KEY "C:\\crypt\\key.dat"
 #define FILE_TO_ENCRYPT "C:\\crypt\\test.txt"
 #define FILE_TO_DECRYPT "C:\\crypt\\test.txt.encrypted"
