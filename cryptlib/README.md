@@ -5,4 +5,5 @@
     - The core encryption algorithm is built from two dependencies
         1. a permutation cypher
         2. a translation cypher
-    - The developer interface of the library 
+    - The developer interface of the library contains internal memory encryption and external file encryption methods to handle different streams of data
+- 
