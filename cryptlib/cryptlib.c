@@ -16,14 +16,10 @@ void prtVoid(const char *ptr){
 }
 
 cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
-    printf("%s\n", key);
-    prtVoid(binData);
     void *permutedData = permute(binData, key, len);
-    prtVoid(permutedData);
     len = len  + (16 - ((len % 16)) % 16);
     void *translatedData = translate(permutedData, key, len);
     free(permutedData);
-    prtVoid(translatedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = translatedData;
     data->len = len;
@@ -31,12 +27,8 @@ cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
 }
 
 cryptData *decryptBinDataInMemory(char *key, size_t len, void *binData) {
-    printf("%s\n", key);
-    prtVoid(binData);
     void *untranslatedData = untranslate(binData, key, len);
-    prtVoid(untranslatedData);
     void *unpermutedData = unpermute(untranslatedData, key, len);
-    prtVoid(unpermutedData);
     free(untranslatedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = unpermutedData;
@@ -58,7 +50,7 @@ void encrypt(char *masterKey, char *pathToFile) {
 
     //encrypt data
     cryptData *encryptedBinData;
-    keyContent[sizeKey] = '\0';
+    keyContent[sizeKey - 1] = '\0';
     encryptedBinData = encryptBinDataInMemory(keyContent, sizeData, inputData);
 
     //write new file
@@ -86,7 +78,7 @@ void decrypt(char *masterKey, char *pathToFile) {
     //decrypt data
     cryptData *decryptedBinData;
     readBinDataFromFile(masterKey, &keyContent, &sizeKey);
-    keyContent[sizeKey] = '\0';
+    keyContent[sizeKey - 1] = '\0';
     decryptedBinData = decryptBinDataInMemory(keyContent, sizeData, inputData);
 
     //write new file

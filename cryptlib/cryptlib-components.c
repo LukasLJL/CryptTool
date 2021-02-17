@@ -13,11 +13,9 @@ int hashKey(const char *keySting) {
     // convert keyAsInt from String to int
     int keyAsInt = 0;
     int keyIndex = 0;
-    printf("%s", keySting);
     while (keySting[keyIndex] != '\0' && keyIndex < 28) {
         keyIndex++;
         keyAsInt += 7 * keySting[keyIndex];
-        printf(".%d.", keyAsInt);
     }
 
     // permute it and ensure a size of 8 digits and positive
@@ -27,7 +25,6 @@ int hashKey(const char *keySting) {
     if (hash % HASH_SEED == 0){
         return hash + 1;
     }
-    printf("\nhash: %d", hash);
 
     return hash;
 }
