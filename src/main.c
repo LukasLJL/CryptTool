@@ -2,6 +2,8 @@
 #include "driveSelector.h"
 #include <string.h>
 //ToDo Text in Englisch schreiben.
+//ToDo Fehler abfangen bei eingabe.
+//ToDo Doppelten Code in Funktion schreiben
 
 int main(void)
 {
@@ -26,15 +28,14 @@ int main(void)
         }
     }
 
-    scanf("%d", selectionCryptMode);
+    /*scanf("%d", selectionCryptMode);
 
     switch(selectionCryptMode)
     {
         case 1:
-            //ToDo Fehler abfangen bei eingabe.
-            //ToDo Doppelten Code in Funktion schreiben
             printf("Enter the Number drive letter, where keyfile is saved:\n");
             scanf("%s", &writeDriveLetter);
+            printf(stderr, "Wrong keyinput");
 
             printf("Enter Path, where keyfile is saved:\n");
             scanf("%s", &writeFilePath);
@@ -48,6 +49,7 @@ int main(void)
         case 2:
             printf("Eingabe von Laufwerksbuchstaben, wo die Key-Datei liegt:\n");
             scanf("%s", &writeDriveLetter);
+            printf(stderr, "Wrong keyinput");
 
             printf("Eingabe von Pfad, wo die Key-Datei liegt:\n");
             scanf("%s", &writeFilePath);
@@ -57,5 +59,5 @@ int main(void)
             printf("Wo liegt die zu verschlüsselnde Datei: ");
             scanf("%s", &writePathEncryptDecrypt);
             break;
-    }
+    }*/
 }
