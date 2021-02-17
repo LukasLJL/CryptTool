@@ -12,7 +12,7 @@ int hashKey(const char *keySting) {
     // convert keyAsInt from String to int
     int keyAsInt = 0;
     int keyIndex = 0;
-    while (keySting[keyIndex] != '\0' || keyIndex < 28) {
+    while (keySting[keyIndex] != '\0' && keyIndex < 28) {
         keyIndex++;
         keyAsInt += 7 * keySting[keyIndex];
     }
@@ -28,7 +28,7 @@ int hashKey(const char *keySting) {
 }
 
 void* createCopy(void *ptrData, size_t len){
-    int differenceToBlock = OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN - (int) len % (OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN);
+    int differenceToBlock = len  + (OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN - ((len % OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN)) % OFFSET_ARRAY_LEN * OFFSET_ARRAY_LEN);
 
     // copy existing data
     void *copy = malloc(len + differenceToBlock);
