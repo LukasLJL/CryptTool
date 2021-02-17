@@ -12,8 +12,8 @@ int main(void)
     int selectionCryptMode = 0;
     int numberOfDrives = getNumberOfDrives();
     int writeDrivePos = 0;
-    char writeKeyFilePath;
-    char writePathEncryptDecrypt[100];
+    char writeKeyFilePath [256];
+    char writePathEncryptDecrypt [256];
     char drive[numberOfDrives][20];
 
     //Menu for CryptMode
@@ -42,7 +42,7 @@ int main(void)
     scanf("%d", &writeDrivePos);
 
     //Get path from key file
-    getMasterKeyPath(drive[writeDrivePos], &writeKeyFilePath);
+    getMasterKeyPath(drive[writeDrivePos], writeKeyFilePath);
 
     //Write Path include file without the quotations: "C:\CryptTool\MAGIC.KEY"
     printf("Path for the encrypted / decrypted file:\n");
@@ -51,10 +51,10 @@ int main(void)
     //Encrypt / Decrypt Mode
     if(selectionCryptMode == 1)
     {
-        encrypt(&writeKeyFilePath, writePathEncryptDecrypt);
+        encrypt(writeKeyFilePath, writePathEncryptDecrypt);
     }
     else if(selectionCryptMode == 2)
     {
-        decrypt(&writeKeyFilePath, writePathEncryptDecrypt);
+        decrypt(writeKeyFilePath, writePathEncryptDecrypt);
     }
 }
