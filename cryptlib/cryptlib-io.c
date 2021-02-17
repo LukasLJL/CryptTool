@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "cryptlib-io.h"
 
 void catchMemoryAllocationFailure(void *ptr) {
@@ -123,4 +124,12 @@ void createNewFolder(char *currentPath, char *folderName) {
     }
     system(command);
     free(command);
+}
+
+void generateKeyFile(char *keyPath){
+    // TODO implement for linux
+    FILE *keyFile = fopen(keyPath, "w");
+    srand(time(NULL));
+    fprintf(keyFile, "hereIsYourKey%d", rand());
+    fclose(keyFile);
 }

@@ -1,24 +1,25 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "cryptlib.h"
 #include "crypt-permutation.h"
 #include "crypt-translate.h"
 
 cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
     void *permutedData = permute(binData, key, len);
+    len = len  + (16 - ((len % 16)) % 16);
     void *translatedData = translate(permutedData, key, len);
-//    free(permutedData);
+    // free(permutedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = translatedData;
     data->len = len;
-    //data->len = len  + (16 - ((len % 16)) % 16);
     return data;
 }
 
 cryptData *decryptBinDataInMemory(char *key, size_t len, void *binData) {
     void *untranslatedData = untranslate(binData, key, len);
     void *unpermutedData = unpermute(untranslatedData, key, len);
-//    free(unpermutedData);
+    // free(unpermutedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = unpermutedData;
     data->len = len;

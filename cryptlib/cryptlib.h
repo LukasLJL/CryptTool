@@ -5,6 +5,7 @@
 #ifndef CRYPT_TOOL_CRYPTLIB_H
 
 #include "cryptlib-io.h"
+#include <stdlib.h>
 
 #define CRYPT_TOOL_CRYPTLIB_H
 
