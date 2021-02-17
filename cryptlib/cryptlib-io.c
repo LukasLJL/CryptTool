@@ -126,10 +126,27 @@ void createNewFolder(char *currentPath, char *folderName) {
     free(command);
 }
 
-void generateKeyFile(char *keyPath){
+void generateKeyFile(char *keyPath) {
     // TODO implement for linux
     FILE *keyFile = fopen(keyPath, "w");
     srand(time(NULL));
     fprintf(keyFile, "hereIsYourKey%d", rand());
     fclose(keyFile);
+}
+
+int getRealLength(void *data, int origSize) {
+    int calcSize = 0;
+    char *tempData = data;
+
+    for (int i = origSize; i > 0; i--) {
+        if (tempData[i] == '\0') {
+            calcSize++;
+        } else{
+            break;
+        }
+    }
+
+    if (calcSize > 1) {
+        return origSize - calcSize + 1;
+    }
 }
