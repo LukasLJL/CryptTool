@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "driveSelector.h"
 #include <string.h>
+#include "../cryptlib/cryptlib-io.h"
+#include "../cryptlib/cryptlib.h"
 //ToDo Text in Englisch schreiben.
 //ToDo Fehler abfangen bei eingabe.
 //ToDo Doppelten Code in Funktion schreiben
@@ -9,8 +11,8 @@ int main(void)
 {
     int selectionCryptMode = 0;
     int numberOfDrives = getNumberOfDrives();
-    char writeDriveLetter[2];
-    char writeFilePath[100];
+    int writeDrivePos;
+    char writeKeyFilePath[100];
     char writePathEncryptDecrypt[100];
     char drive[numberOfDrives][20];
 
@@ -33,30 +35,26 @@ int main(void)
 
     if(selectionCryptMode == 1)
     {
-        printf("\nEnter the Number drive letter, where keyfile is saved:\n");
-        scanf("%s", &writeDriveLetter);
-        printf(stderr, "Wrong keyinput");
+        printf("\nEingabe der Zahl, wo die KeyDatei ist:\n");
+        scanf("%d", &writeDrivePos);
 
-        printf("Enter Path, where keyfile is saved:\n");
-        scanf("%s", &writeFilePath);
-
-        getMasterKeyPath(writeDriveLetter, writeFilePath);
+        getMasterKeyPath(drive[writeDrivePos], writeKeyFilePath);
 
         printf("Path for the encryptfile:\n");
         scanf("%s", &writePathEncryptDecrypt);
+
+        encrypt(&writeKeyFilePath, &writePathEncryptDecrypt);
     }
     else if(selectionCryptMode == 2)
     {
-            printf("\nEingabe von Laufwerksbuchstaben, wo die Key-Datei liegt:\n");
-            scanf("%s", &writeDriveLetter);
-            printf(stderr, "Wrong keyinput");
+        printf("\nEingabe von Laufwerksbuchstaben, wo die Key-Datei liegt:\n");
+        scanf("%s", &writeDrivePos);
 
-            printf("Eingabe von Pfad, wo die Key-Datei liegt:\n");
-            scanf("%s", &writeFilePath);
+        getMasterKeyPath(drive[writeDrivePos], writeKeyFilePath);
 
-            getMasterKeyPath(writeDriveLetter, writeFilePath);
+        printf("Wo liegt die zu verschlüsselnde Datei:\n");
+        scanf("%s", &writePathEncryptDecrypt);
 
-            printf("Wo liegt die zu verschlüsselnde Datei:\n");
-            scanf("%s", &writePathEncryptDecrypt);
-    }*/
+        decrypt(&writeKeyFilePath, &writePathEncryptDecrypt);
+    }
 }
