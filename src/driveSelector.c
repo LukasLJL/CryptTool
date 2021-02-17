@@ -5,7 +5,7 @@
 #ifdef __linux
 char *osTyp = "Linux";
 char *pathToKey = "/CryptTool/MAGIC.KEY";
-#elif _WIN64
+#elif _WIN64 || _WIN32
 char *osTyp = "Windows";
 char *pathToKey = ":\\CryptTool\\MAGIC.KEY";
 #else
