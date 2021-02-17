@@ -5,11 +5,21 @@
 #include "crypt-permutation.h"
 #include "crypt-translate.h"
 
+void prtVoid(const char *ptr){
+    static int a = 0;
+    printf("%d:\n", a);
+    for (int i = 0; i < 16; i++){
+        printf("%10x, ", *(ptr + i));
+    }
+    printf("\n");
+    a++;
+}
+
 cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
     void *permutedData = permute(binData, key, len);
-    len = len  + (16 - ((len % 16)) % 16);
+    len = len + (16 - ((len % 16)) % 16);
     void *translatedData = translate(permutedData, key, len);
-    // free(permutedData);
+    free(permutedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = translatedData;
     data->len = len;
@@ -19,7 +29,7 @@ cryptData *encryptBinDataInMemory(char *key, size_t len, void *binData) {
 cryptData *decryptBinDataInMemory(char *key, size_t len, void *binData) {
     void *untranslatedData = untranslate(binData, key, len);
     void *unpermutedData = unpermute(untranslatedData, key, len);
-    // free(unpermutedData);
+    free(untranslatedData);
     cryptData *data = malloc(sizeof(cryptData));
     data->binData = unpermutedData;
     data->len = len;
@@ -40,6 +50,7 @@ void encrypt(char *masterKey, char *pathToFile) {
 
     //encrypt data
     cryptData *encryptedBinData;
+    keyContent[sizeKey - 1] = '\0';
     encryptedBinData = encryptBinDataInMemory(keyContent, sizeData, inputData);
 
     //write new file
@@ -53,7 +64,7 @@ void encrypt(char *masterKey, char *pathToFile) {
 }
 
 void decrypt(char *masterKey, char *pathToFile) {
-    char *newFile =getNewDecryptedFileName(pathToFile);
+    char *newFile = getNewDecryptedFileName(pathToFile);
     int sizeData = 0;
     char *inputData = NULL;
 
@@ -63,10 +74,11 @@ void decrypt(char *masterKey, char *pathToFile) {
     //Key stuff
     int sizeKey = 0;
     char *keyContent = NULL;
-    readBinDataFromFile(masterKey, &keyContent, &sizeKey);
 
     //decrypt data
     cryptData *decryptedBinData;
+    readBinDataFromFile(masterKey, &keyContent, &sizeKey);
+    keyContent[sizeKey - 1] = '\0';
     decryptedBinData = decryptBinDataInMemory(keyContent, sizeData, inputData);
 
     //write new file

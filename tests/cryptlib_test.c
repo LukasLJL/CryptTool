@@ -12,7 +12,7 @@
 #endif
 
 int main() {
-    //generateKeyFile(PATH_TO_KEY);
+    generateKeyFile(PATH_TO_KEY);
     encrypt_test(PATH_TO_KEY, FILE_TO_ENCRYPT, (void *(*)(char *)) "0");
     decrypt_test(PATH_TO_KEY, FILE_TO_DECRYPT, (void *(*)(char *)) "0");
 }

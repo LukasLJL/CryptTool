@@ -3,6 +3,7 @@
 //
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #define MAX_HASH_SIZE 100000000
 #define HASH_SEED 82638153
@@ -24,6 +25,7 @@ int hashKey(const char *keySting) {
     if (hash % HASH_SEED == 0){
         return hash + 1;
     }
+
     return hash;
 }
 
