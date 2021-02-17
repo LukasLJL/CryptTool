@@ -3,8 +3,8 @@
 
 #ifdef __linux
 #define PATH_TO_KEY "/mnt/c/crypt/key.dat"
-#define FILE_TO_ENCRYPT "/mnt/c/crypt/IMG_1402_edit.jpg"
-#define FILE_TO_DECRYPT "/mnt/c/crypt/IMG_1402_edit.jpg.encrypted"
+#define FILE_TO_ENCRYPT "/mnt/c/crypt/test.txt"
+#define FILE_TO_DECRYPT "/mnt/c/crypt/test.txt.encrypted"
 #elif _WIN64
 #define PATH_TO_KEY "C:\\crypt\\key.dat"
 #define FILE_TO_ENCRYPT "C:\\crypt\\test.txt"
@@ -12,7 +12,7 @@
 #endif
 
 int main() {
-    generateKeyFile(PATH_TO_KEY);
+    //generateKeyFile(PATH_TO_KEY);
     encrypt_test(PATH_TO_KEY, FILE_TO_ENCRYPT, (void *(*)(char *)) "0");
     decrypt_test(PATH_TO_KEY, FILE_TO_DECRYPT, (void *(*)(char *)) "0");
 }
