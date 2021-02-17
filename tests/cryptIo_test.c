@@ -8,7 +8,7 @@
 #define PATH_TO_KEY "/mnt/c/crypt/key.dat"
 #define FILE "/mnt/c/crypt/testfile.blub"
 #define NEW_FILE "/mnt/c/crypt/newfile.bin"
-#elif _WIN64
+#elif _WIN64 || _WIN32
 #define PATH_TO_KEY "C:\\crypt\\key.dat"
 #define FILE "C:\\crypt\\testfile.blub"
 #define NEW_FILE "C:\\crypt\\newfile.bin"
