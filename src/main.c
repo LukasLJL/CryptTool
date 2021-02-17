@@ -7,7 +7,7 @@
 
 int main(void)
 {
-    int selectionCryptMode;
+    int selectionCryptMode = 0;
     int numberOfDrives = getNumberOfDrives();
     char writeDriveLetter[2];
     char writeFilePath[100];
@@ -15,39 +15,39 @@ int main(void)
     char drive[numberOfDrives][20];
 
     printf("Select CryptMode:\n");
-    printf("(1) Encrypt");
+    printf("(1) Encrypt\n");
     printf("(2) Decrypt\n");
+
+    scanf("%d", &selectionCryptMode);
 
     getAllDrives(drive);
 
+    printf("\nDrives:\n");
     for (int i = 0; i < numberOfDrives; i++)
     {
         for (int k = 0; k < strlen(drive[i]); k++)
         {
-            printf("%c", drive[i][k]);
+            printf("Drive %d: %c\n", k, drive[i][k]);
         }
     }
 
-    /*scanf("%d", selectionCryptMode);
-
-    switch(selectionCryptMode)
+    if(selectionCryptMode == 1)
     {
-        case 1:
-            printf("Enter the Number drive letter, where keyfile is saved:\n");
-            scanf("%s", &writeDriveLetter);
-            printf(stderr, "Wrong keyinput");
+        printf("\nEnter the Number drive letter, where keyfile is saved:\n");
+        scanf("%s", &writeDriveLetter);
+        printf(stderr, "Wrong keyinput");
 
-            printf("Enter Path, where keyfile is saved:\n");
-            scanf("%s", &writeFilePath);
+        printf("Enter Path, where keyfile is saved:\n");
+        scanf("%s", &writeFilePath);
 
-            getMasterKeyPath(writeDriveLetter, writeFilePath);
+        getMasterKeyPath(writeDriveLetter, writeFilePath);
 
-            printf("Path for the encryptfile:");
-            scanf("%s", &writePathEncryptDecrypt);
-            break;
-
-        case 2:
-            printf("Eingabe von Laufwerksbuchstaben, wo die Key-Datei liegt:\n");
+        printf("Path for the encryptfile:\n");
+        scanf("%s", &writePathEncryptDecrypt);
+    }
+    else if(selectionCryptMode == 2)
+    {
+            printf("\nEingabe von Laufwerksbuchstaben, wo die Key-Datei liegt:\n");
             scanf("%s", &writeDriveLetter);
             printf(stderr, "Wrong keyinput");
 
@@ -56,8 +56,7 @@ int main(void)
 
             getMasterKeyPath(writeDriveLetter, writeFilePath);
 
-            printf("Wo liegt die zu verschlüsselnde Datei: ");
+            printf("Wo liegt die zu verschlüsselnde Datei:\n");
             scanf("%s", &writePathEncryptDecrypt);
-            break;
     }*/
 }
