@@ -127,7 +127,6 @@ void createNewFolder(char *currentPath, char *folderName) {
 }
 
 void generateKeyFile(char *keyPath) {
-    // TODO implement for linux
     FILE *keyFile = fopen(keyPath, "w");
     srand(time(NULL));
     fprintf(keyFile, "hereIsYourKey%d", rand());
