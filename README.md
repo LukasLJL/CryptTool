@@ -48,3 +48,9 @@ Our CryptTool has the functionality to en- and decrypt files. How you can use it
 We have a documentation for every part of the CryptTool program
 - [DriveSelector](https://github.com/LukasLJL/CryptTool/blob/master/src/README.md)
 - [CryptLib](https://github.com/LukasLJL/CryptTool/blob/master/cryptlib/README.md)
+
+Build and installation instructions
+- Option A: in CLion press refresh cmake-lists choose main from run configs to run
+- Option B: 
+	1. make sure you have cmake installed on your machine
+	2. from the root directory run ``cmake main``
