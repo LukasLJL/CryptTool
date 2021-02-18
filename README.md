@@ -21,28 +21,28 @@
 ## User Documentation 
 User Documentation
 
-Our CryptTool has the functionality to en- and decrypt files. How you can use it or achive it, we describe in the following:
+Our CryptTool has the functionality to en- and decrypt files. How you can use it or achieve it, we describe in the following:
 
-1. 	As you start the program. The user gets an overview of his drives. Our user can choose between three options:
+1. 	As you start the program.  Our user can choose between four options:
 
       - 1st: You want to encrypt a file.
 
       - 2nd: You want to decrypt a file.
 
       - 3rd: You want to create a key for the en- or decryption.
-
-
-2. 	Afterwards the program need to know, in which drive you want to save/decrypt/encrypt your file.
-
-
-3. 	Also, its necessary to tell the program in which path your file is saved or want to be saved. For example: C:\CryptTool\BEISPIELDATEI.TXT
+        
+      - 4th: Exit Tool
+      
+2. After that the user gets an overview of his drives. The user have to chose a drive, on which his Decrypt/Encrypt Key is stored.
+   
+3. Also, its necessary to tell the program in which path your file is saved. For example: ``C:\CryptTool\ImportantDocument.txt``
       
       - Be aware not to type double slash instead of a single one.
+      
+4.1. On encrypt mode, an encrypted file will be created with the file extension .encrypted
+4.2  On decrypt mode, a new folder will be created with the name "Decrypted", where the decrypted file is then located
 
-
-4.  Its important to mention that, if you want to create a key, you have to create an folder by yourself and name it "CryptTool". And at the time you create the key, you have to put it inside the "CryptTool" folder.
-
-
+5.  Its important to mention that, if you want to create a key, you have to create an folder by yourself and name it "CryptTool". (Example: ``C:\CryptTool``)
 
 ## Developer Documentation
 We have a documentation for every part of the CryptTool program
