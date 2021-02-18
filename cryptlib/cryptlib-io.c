@@ -126,6 +126,36 @@ void createNewFolder(char *currentPath, char *folderName) {
     free(command);
 }
 
+void createFolderForKeyFile(char *keyPath){
+    int size = (int) strlen(keyPath);
+    char *newFolderName = "CryptTool";
+    char *newPath = (char *) malloc(sizeof(char) * 512);
+    int fistSlash = 0;
+    int lastSlash = 0;
+    int previousSlash = 0;
+
+    memset(newPath, 0, sizeof(char));
+    if (strcmp(getOSTyp(), "Windows") == 0) {
+        for (int i = 0; i < size; i++) {
+            if (keyPath[i] == '\\') {
+                fistSlash = i;
+                break;
+            }
+        }
+        strncat(newPath, keyPath, fistSlash+1);
+    } else if (strcmp(getOSTyp(), "Linux") == 0) {
+        for (int i = 0; i < size; i++) {
+            if (keyPath[i] == '/') {
+                previousSlash = lastSlash;
+                lastSlash = i;
+            }
+        }
+        strncat(newPath, keyPath, previousSlash);
+    }
+    createNewFolder(newPath, newFolderName);
+    free(newPath);
+}
+
 void generateKeyFile(char *keyPath) {
     FILE *keyFile = fopen(keyPath, "w");
     srand(time(NULL));
@@ -140,7 +170,7 @@ int getRealLength(void *data, int origSize) {
     for (int i = origSize; i > 0; i--) {
         if (tempData[i] == '\0') {
             calcSize++;
-        } else{
+        } else {
             break;
         }
     }

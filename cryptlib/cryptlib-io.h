@@ -1,5 +1,6 @@
 #ifndef CRYPT_TOOL_CRYPTLIB_IO_H
 #define CRYPT_TOOL_CRYPTLIB_IO_H
+
 #include "cryptlib-osHandling.h"
 
 void catchMemoryAllocationFailure(void *);
@@ -13,6 +14,8 @@ char *getNewEncryptedFileName(char *);
 char *getNewDecryptedFileName(char *);
 
 void createNewFolder(char *, char *);
+
+void createFolderForKeyFile(char *);
 
 void generateKeyFile(char *);
 

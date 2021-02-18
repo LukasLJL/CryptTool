@@ -42,7 +42,6 @@ Our CryptTool has the functionality to en- and decrypt files. How you can use it
 4.1. On encrypt mode, an encrypted file will be created with the file extension .encrypted
 4.2  On decrypt mode, a new folder will be created with the name "Decrypted", where the decrypted file is then located
 
-5.  Its important to mention that, if you want to create a key, you have to create an folder by yourself and name it "CryptTool". (Example: ``C:\CryptTool``)
 
 ## Developer Documentation
 We have a documentation for every part of the CryptTool program

@@ -62,6 +62,8 @@ void user_encrypt() {
     scanf("%s", pathToFile);
 
     encrypt(keyFile, pathToFile);
+    free(pathToFile);
+    free(keyFile);
 }
 
 void user_decrypt() {
@@ -74,6 +76,8 @@ void user_decrypt() {
     scanf("%s", pathToFile);
 
     decrypt(keyFile, pathToFile);
+    free(pathToFile);
+    free(keyFile);
 }
 
 char *getKeyLocation() {
@@ -92,7 +96,7 @@ char *getKeyLocation() {
         }
         printf("\n");
     }
-    printf("Option %d: Enter Path to Key Manually", numberOfDrives + 1);
+    printf("Option %d: Enter Path to Key Manually", numberOfDrives);
 
 
     int selectedDrive = 0;
@@ -101,10 +105,10 @@ char *getKeyLocation() {
     //Get desired drive number
     keyFilePath = (char *) malloc(sizeof(char) * 256);
     printf("\n--##--##--");
-    printf("\nChose %d to %d to Select the Key Path\n", 0, numberOfDrives + 1);
+    printf("\nChose %d to %d to Select the Key Path\n", 0, numberOfDrives);
     scanf("%d", &selectedDrive);
 
-    if (selectedDrive == numberOfDrives + 1) {
+    if (selectedDrive == numberOfDrives) {
         printf("Enter Key Path Manually:\n");
         scanf("%s", keyFilePath);
     } else {
@@ -116,5 +120,6 @@ char *getKeyLocation() {
 
 void genKey() {
     char *keyPath = getKeyLocation();
+    createFolderForKeyFile(keyPath);
     generateKeyFile(keyPath);
 }
