@@ -53,4 +53,5 @@ Build and installation instructions
 - Option A: in CLion press refresh cmake-lists choose main from run configs to run
 - Option B: 
 	1. make sure you have cmake installed on your machine
-	2. from the root directory run ``cmake main``
+	2. from the root directory run ``cmake --build ".\cmake-build-debug" --target main -- -j 6``
+	3. run ``.\cmake-build-debug\src\main.exe``
