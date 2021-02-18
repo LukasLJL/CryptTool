@@ -1,4 +1,4 @@
-## Cryptlib
+# Cryptlib
 
 ## Overview
 This Project relies on a custom encryption library to handle its files and the encryption thereof
