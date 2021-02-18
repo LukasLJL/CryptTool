@@ -39,8 +39,8 @@ Our CryptTool has the functionality to en- and decrypt files. How you can use it
       
       - Be aware not to type double slash instead of a single one.
       
-4.1. On encrypt mode, an encrypted file will be created with the file extension .encrypted
-4.2  On decrypt mode, a new folder will be created with the name "Decrypted", where the decrypted file is then located
+4.1 On encrypt mode, an encrypted file will be created with the file extension .encrypted <br>
+4.2 On decrypt mode, a new folder will be created with the name "Decrypted", where the decrypted file is then located
 
 
 ## Developer Documentation
