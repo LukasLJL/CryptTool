@@ -1,5 +1,7 @@
 # CryptTool
 
+![Start Screen of Program](/.github/images/start_screen.png)
+
 ## Contents
 - [CryptTool](#crypttool)
 - [Requirements](#requirements)
