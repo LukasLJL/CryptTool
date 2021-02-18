@@ -19,26 +19,30 @@
 - Decrypt with a generated Key
 
 ## User Documentation 
-Dokumentation für den Anwender
+User Documentation
 
-Das CryptTool ist für die ver- und entschlüsselung von Dateien zuständig. Dies wird wie folgt erreicht:
+Our CryptTool has the functionality to en- and decrypt files. How you can use it or achive it, we describe in the following:
 
-1. 	Der Anwender bekommt in der Kommandozeile eine Auswahl eine Datei
-      zu entschlüsseln, verschlüsseln und eine Key Datei zu erstellen um
-      die Dateien überhaupt verschlüsseln oder entschlüsseln zu können.
-      Außerdem werden alle Laufwerke aufgelistet.
+1. 	As you start the program. The user gets an overview of his drives. Our user can choose between three options:
 
+      - 1st: You want to encrypt a file.
 
-2. 	Danach muss das Programm wissen auf welchen 		
-      Laufwerk es die Datei
-      erstellen/verschlüsseln/entschlüsseln soll.
+      - 2nd: You want to decrypt a file.
+
+      - 3rd: You want to create a key for the en- or decryption.
 
 
-3. 	Es wird nach dem Pfad gefragt wo die Datei stehen 	
-      soll oder ist. Bsp.: C:\CryptTool\BEISPIELDATEI.TXT
+2. 	Afterwards the program need to know, in which drive you want to save/decrypt/encrypt your file.
 
-3.1 	Eine Besonderheit ist hier, dass wenn man ein Key erstellen 				möchte, der Ordner "CryptTool" angelegt werden sollte. 
-	
+
+3. 	Also, its necessary to tell the program in which path your file is saved or want to be saved. For example: C:\CryptTool\BEISPIELDATEI.TXT
+      
+      - Be aware not to type double slash instead of a single one.
+
+
+4.  Its important to mention that, if you want to create a key, you have to create an folder by yourself and name it "CryptTool". And at the time you create the key, you have to put it inside the "CryptTool" folder.
+
+
 
 ## Developer Documentation
 We have a documentation for every part of the CryptTool program
